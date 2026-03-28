@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mood Ring Radio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+
+    <div class="radio-overlay">
+      <div class="project-box" id="projectBox">Mood Ring Radio</div>
+      <div class="song-box" id="songBox">Click a mood to get a song</div>
+    </div>
+
+    <div class="button-panel">
+      <button class="mood-btn" data-mood="angry">Angry</button>
+      <button class="mood-btn" data-mood="flirty">Flirty</button>
+      <button class="mood-btn" data-mood="chillness">Chill</button>
+      <button class="mood-btn" data-mood="gloomy">Gloomy</button>
+      <button class="mood-btn" data-mood="yearn">Yearn</button>
+      <button class="mood-btn" data-mood="energetic">Energetic</button>
+    </div>
+
+  </div>
+
+  <script>
+    const songsByMood = {
+      angry: {
+        emoji: "🧨",
+        songs: [
+          { title: "Misery Business", artist: "Paramore" },
+          { title: "You Make Me Sick!", artist: "Ashnikko" },
+          { title: "Wet", artist: "Dazey and the Scouts" },
+          { title: "Uppercut", artist: "Babe Haven" },
+          { title: "Hair of Dog", artist: "Die Spitz" },
+          { title: "7 Words", artist: "Deftones" },
+          { title: "Blood", artist: "Sweet Pill" },
+          { title: "Both Sides", artist: "No Pressure" },
+          { title: "Where Am I?", artist: "Title Fight" },
+          { title: "Brackish", artist: "Kittie" },
+          { title: "Sleep to Dream", artist: "Fiona Apple" },
+          { title: "Get Gone", artist: "Fiona Apple" }
+        ]
+      },
+
+      flirty: {
+        emoji: "💋",
+        songs: [
+          { title: "Sweet Serotonin", artist: "Amber Mark" },
+          { title: "Warm Honey", artist: "WILLOW" },
+          { title: "One Evening", artist: "Feist" },
+          { title: "Love Affair", artist: "Larry Lovestein & The Velvet Revival" },
+          { title: "You", artist: "Larry Lovestein & The Velvet Revival" },
+          { title: "I could", artist: "Fine" },
+          { title: "If Looks Could Kill", artist: "A Heartwell Ending" },
+          { title: "Hush", artist: "The Marías" },
+          { title: "Tear You Apart", artist: "She Wants Revenge" },
+          { title: "Vibrate", artist: "Drug Store Romeos" },
+          { title: "Wandering Star", artist: "Portishead" }
+        ]
+      },
+
+      chillness: {
+        emoji: "😌",
+        songs: [
+          { title: "Dark & Handsome", artist: "Blood Orange" },
+          { title: "Gabby", artist: "The Internet" },
+          { title: "Nude", artist: "Radiohead" },
+          { title: "Care for You", artist: "The Marías" },
+          { title: "Brown eyes*", artist: "re6ce" },
+          { title: "Blackberry Molasses", artist: "Mista" },
+          { title: "Sweet Boy", artist: "Malcom Todd" },
+          { title: "Cranekiss", artist: "Tamaryn" },
+          { title: "Guilty Conscience", artist: "070 Shake" },
+          { title: "Girls just wanna have fun", artist: "Smerz" },
+          { title: "Medicine", artist: "Momma" },
+          { title: "Winter Baby / New Jersey Blues", artist: "070 Shake" },
+          { title: "Love Came Here", artist: "Lhasa de Sela" },
+          { title: "I Wanna Be Down", artist: "Brandy" },
+          { title: "Kiss Me", artist: "Sixpence None the Richer" },
+          { title: "Moon River", artist: "Frank Ocean" },
+          { title: "SUMMER", artist: "BROCKHAMPTON" },
+          { title: "Small Worlds", artist: "Mac Miller" }
+        ]
+      },
+
+      gloomy: {
+        emoji: "🌧️",
+        songs: [
+          { title: "Exit Music", artist: "Radiohead" },
+          { title: "Pandora", artist: "Whisp" },
+          { title: "Alameda", artist: "Elliott Smith" },
+          { title: "Piano instrumental", artist: "Julie" },
+          { title: "Into Dust", artist: "Mazzy Star" },
+          { title: "Only When I", artist: "Alice Phoebe Lou" },
+          { title: "Velvet Mood", artist: "Alice Phoebe Lou" },
+          { title: "Apocalypse", artist: "Neva Dinova" },
+          { title: "Some Unholy War", artist: "Amy Winehouse" },
+          { title: "Say Yes", artist: "Elliott Smith" },
+          { title: "Bitter Everyday", artist: "Wednesday" },
+          { title: "Wasting Your Time", artist: "Indigo De Souza" },
+          { title: "How I Get Myself Killed", artist: "Indigo De Souza" },
+          { title: "Beetlebum", artist: "Blur" },
+          { title: "India Rubber", artist: "Radiohead" },
+          { title: "High Alone", artist: "Sevdaliza" },
+          { title: "Fade into You", artist: "Mazzy Star" }
+        ]
+      },
+
+      yearn: {
+        emoji: "💭",
+        songs: [
+          { title: "Bags", artist: "Clairo" },
+          { title: "American Love Song", artist: "Infinity Song & Momo Boyd" },
+          { title: "I Don’t Care If You’re Contagious", artist: "Pierce the Veil" },
+          { title: "Closer", artist: "Nine Inch Nails" },
+          { title: "So Hard", artist: "Trophy Wife" },
+          { title: "Slow Burn", artist: "Sweet Pill" },
+          { title: "Haunt Me", artist: "Sade" },
+          { title: "Slow Like Honey", artist: "Fiona Apple" },
+          { title: "All I Need", artist: "Radiohead" },
+          { title: "All I Wanted", artist: "Paramore" },
+          { title: "Lejos de Ti", artist: "The Marías" },
+          { title: "Something", artist: "The Beatles" },
+          { title: "4Me 4Me", artist: "Malcom Todd" },
+          { title: "I Want You (She’s So Heavy)", artist: "The Beatles" },
+          { title: "Talk", artist: "Lucy Dacus" },
+          { title: "Night Shift", artist: "Lucy Dacus" },
+          { title: "Good Ol Days", artist: "Hayley Williams" }
+        ]
+      },
+
+      energetic: {
+        emoji: "⚡",
+        songs: [
+          { title: "One More Time", artist: "Daft Punk" },
+          { title: "Heads Will Roll", artist: "Yeah Yeah Yeahs" },
+          { title: "Dog Days Are Over", artist: "Florence + The Machine" },
+          { title: "Electric Feel", artist: "MGMT" },
+          { title: "Bad Girls", artist: "M.I.A." },
+          { title: "Nosebleeds", artist: "Doechii" },
+          { title: "Song 2", artist: "Blur" },
+          { title: "Aleph", artist: "Gesaffelstein" },
+          { title: "BIRDS", artist: "Turnstile" }
+        ]
+      }
+    };
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
