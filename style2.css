@@ -1,19 +1,27 @@
 body {
-  background: #2b1d14;
+  margin: 0;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  font-family: 'Georgia', serif;
+  font-family: "Georgia", serif;
+  background-image: linear-gradient(rgba(24, 14, 8, 0.55), rgba(24, 14, 8, 0.55)), url("radio.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .radio {
   width: 440px;
-  background: linear-gradient(145deg, #8b5a2b, #6e4421);
-  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(139, 90, 43, 0.96), rgba(110, 68, 33, 0.96));
+  border: 1px solid rgba(235, 210, 170, 0.25);
+  border-radius: 18px;
   padding: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 240, 220, 0.18);
   position: relative;
+  backdrop-filter: blur(2px);
 }
 
 .handle {
@@ -26,6 +34,7 @@ body {
   top: -25px;
   left: 50%;
   transform: translateX(-50%);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
 .radio-inner {
@@ -70,10 +79,13 @@ body {
 }
 
 .display {
-  background: #d8c29a;
-  padding: 8px;
-  border-radius: 6px;
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.4);
+  background: linear-gradient(180deg, #e2cfab, #ccb083);
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(93, 57, 28, 0.35);
+  box-shadow:
+    inset 0 2px 6px rgba(255,255,255,0.22),
+    inset 0 -2px 6px rgba(0,0,0,0.18);
 }
 
 .display input {
@@ -83,58 +95,103 @@ body {
   font-size: 14px;
   outline: none;
   font-family: inherit;
+  color: #2b1d14;
 }
 
 .frequency {
-  background: #222;
-  color: #fff;
+  background: linear-gradient(180deg, #1b1b1b, #2a2a2a);
+  color: #f7ead1;
   text-align: center;
-  padding: 6px;
-  border-radius: 4px;
-  margin-top: 6px;
+  padding: 7px;
+  border-radius: 5px;
+  margin-top: 8px;
   font-size: 13px;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
+  border: 1px solid rgba(255, 233, 191, 0.14);
+  box-shadow: inset 0 1px 3px rgba(255,255,255,0.08);
 }
 
 /* 6-knob grid */
 .knobs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-top: 12px;
+  gap: 14px;
+  margin-top: 14px;
 }
 
 /* Knob style */
 .knob {
-  width: 42px;
-  height: 42px;
-  background: radial-gradient(circle, #666, #222);
+  width: 48px;
+  height: 48px;
+  background: radial-gradient(circle at 30% 30%, #7f7f7f, #2a2a2a 68%, #111 100%);
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 50%;
-  box-shadow: 
-    inset 0 2px 4px rgba(255,255,255,0.3),
-    0 2px 6px rgba(0,0,0,0.6);
+  box-shadow:
+    inset 0 2px 5px rgba(255,255,255,0.28),
+    inset 0 -3px 5px rgba(0,0,0,0.45),
+    0 4px 10px rgba(0,0,0,0.55);
   cursor: grab;
   position: relative;
-  transition: transform 0.1s ease-out;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
 /* Indicator line */
 .knob::after {
-  content: '';
+  content: "";
   width: 3px;
-  height: 14px;
-  background: #fff;
+  height: 15px;
+  background: linear-gradient(180deg, #fff8e7, #d7bf8b);
   position: absolute;
   top: 6px;
   left: 50%;
   transform: translateX(-50%);
   border-radius: 2px;
+  box-shadow: 0 0 4px rgba(255, 248, 231, 0.35);
+}
+
+/* Hover */
+.knob:hover {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow:
+    inset 0 2px 5px rgba(255,255,255,0.32),
+    inset 0 -3px 5px rgba(0,0,0,0.45),
+    0 6px 14px rgba(0,0,0,0.6);
 }
 
 /* Active drag feel */
 .knob:active {
   cursor: grabbing;
-  box-shadow: 
-    inset 0 2px 6px rgba(255,255,255,0.2),
-    0 1px 3px rgba(0,0,0,0.8);
+  transform: scale(0.97);
+  box-shadow:
+    inset 0 2px 7px rgba(255,255,255,0.18),
+    inset 0 -2px 5px rgba(0,0,0,0.65),
+    0 2px 6px rgba(0,0,0,0.7);
+}
+
+/* Optional button styling if you have actual buttons too */
+button {
+  background: linear-gradient(180deg, #5a3820, #3b2415);
+  color: #f6e7c8;
+  border: 1px solid rgba(237, 204, 156, 0.35);
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255, 238, 205, 0.18);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 6px 14px rgba(0,0,0,0.42),
+    inset 0 1px 0 rgba(255, 238, 205, 0.22);
+}
+
+button:active {
+  transform: translateY(1px);
 }
