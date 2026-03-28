@@ -3,85 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mood Music Recommender</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #1f1c2c, #928dab);
-      color: white;
-    }
-
-    .container {
-      background: rgba(0, 0, 0, 0.35);
-      padding: 30px;
-      border-radius: 16px;
-      width: 90%;
-      max-width: 650px;
-      text-align: center;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    }
-
-    h1 {
-      margin-bottom: 10px;
-    }
-
-    p {
-      margin-bottom: 20px;
-    }
-
-    select,
-    button {
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: none;
-      margin: 10px 5px;
-    }
-
-    select {
-      width: 220px;
-    }
-
-    button {
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    #songResult {
-      margin-top: 25px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.12);
-      border-radius: 12px;
-      min-height: 120px;
-    }
-
-    .song-title {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-
-    .song-artist {
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-
-    .song-description {
-      font-size: 15px;
-      opacity: 0.9;
-    }
-  </style>
+  <title>Mood Ring Radio</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>🎵 Mood Music Recommender</h1>
+    <h1>Mood Ring Radio</h1>
     <p>Choose a mood and get a random song recommendation.</p>
+
+    <div class="radio-screen">
+      <div class="screen-label">NOW PLAYING</div>
+      <div id="screenMood">Select a mood</div>
+      <div id="screenText">Your song will appear here</div>
+    </div>
 
     <select id="moodSelect">
       <option value="">-- Select a Mood --</option>
@@ -135,17 +69,13 @@
           { title: "Hush", artist: "The Marías" },
           { title: "Tear You Apart", artist: "She Wants Revenge" },
           { title: "Vibrate", artist: "Drug Store Romeos" },
-          { title: "Wandering Star", artist: "Portishead" },
-          { title: "Lockjaw 2", artist: "Amindi & Amaarae" },
-          { title: "Glory Box", artist: "Portishead" },
-          { title: "Talk Show Host", artist: "Radiohead" },
-          { title: "Worst Behavior", artist: "Ariana Grande" }
+          { title: "Wandering Star", artist: "Portishead" }
         ]
       },
 
       chillness: {
         emoji: "😌",
-        description: "Laid-back tracks for relaxing and taking it easy.",
+        description: "Soft, calm, and easygoing songs for relaxed moods.",
         songs: [
           { title: "Dark & Handsome (feat. Toro y Moi)", artist: "Blood Orange" },
           { title: "Gabby (feat. Janelle Monáe)", artist: "The Internet" },
@@ -220,56 +150,20 @@
         emoji: "⚡",
         description: "Fast, bold, and high-energy songs to hype you up.",
         songs: [
-          { title: "Besitos", artist: "Pierce the Veil" },
-          { title: "Caraphernelia", artist: "Pierce the Veil" },
-          { title: "BLACKOUT", artist: "Turnstile" },
-          { title: "WILD WRLD", artist: "Turnstile" },
-          { title: "Scorsese Baby Daddy", artist: "SZA" },
-          { title: "CRANK", artist: "Slayyyter" },
-          { title: "NISSAN ALTIMA", artist: "Doechii" },
-          { title: "WASSUP", artist: "Young Miko" },
-          { title: "Crash", artist: "Gwen Stefani" },
-          { title: "Vroom Vroom", artist: "Charli xcx" },
-          { title: "Combat Baby", artist: "Metric" },
-          { title: "Borderline (feat. Missy Elliott)", artist: "Ariana Grande" },
-          { title: "FLATLINE", artist: "Frost Children" },
-          { title: "WEEDKILLER", artist: "Ashnikko" },
-          { title: "Banana Brain", artist: "Die Antwoord" },
-          { title: "Hysteria", artist: "Muse" },
-          { title: "Plug In Baby", artist: "Muse" },
-          { title: "HARD", artist: "FKA twigs" },
-          { title: "Love Is Free (feat. Maluca)", artist: "Robyn & La Bagatelle Magique" },
-          { title: "Nosebleeds", artist: "Doechii" },
+          { title: "One More Time", artist: "Daft Punk" },
+          { title: "Heads Will Roll", artist: "Yeah Yeah Yeahs" },
+          { title: "Dog Days Are Over", artist: "Florence + The Machine" },
+          { title: "Electric Feel", artist: "MGMT" },
           { title: "Bad Girls", artist: "M.I.A." },
-          { title: "Bubble Pop Electric (ft. Johnny Vulture)", artist: "Gwen Stefani" },
-          { title: "GOLD", artist: "BROCKHAMPTON" },
+          { title: "Nosebleeds", artist: "Doechii" },
           { title: "Song 2", artist: "Blur" },
           { title: "Aleph", artist: "Gesaffelstein" },
           { title: "BIRDS", artist: "Turnstile" }
         ]
       }
     };
-
-    function generateRandomSong() {
-      const selectedMood = document.getElementById("moodSelect").value;
-      const resultBox = document.getElementById("songResult");
-
-      if (!selectedMood) {
-        resultBox.innerHTML = "<p>Please select a mood first.</p>";
-        return;
-      }
-
-      const moodData = songsByMood[selectedMood];
-      const songs = moodData.songs;
-      const randomIndex = Math.floor(Math.random() * songs.length);
-      const randomSong = songs[randomIndex];
-
-      resultBox.innerHTML = `
-        <div class="song-title">${moodData.emoji} ${randomSong.title}</div>
-        <div class="song-artist">by ${randomSong.artist}</div>
-        <div class="song-description">${moodData.description}</div>
-      `;
-    }
   </script>
+
+  <script src="script.js"></script>
 </body>
 </html>

@@ -1,10 +1,13 @@
 function generateRandomSong() {
   const selectedMood = document.getElementById("moodSelect").value;
   const resultBox = document.getElementById("songResult");
-  const cd = document.querySelector(".cd");
+  const screenMood = document.getElementById("screenMood");
+  const screenText = document.getElementById("screenText");
 
   if (!selectedMood) {
     resultBox.innerHTML = "<p>Please select a mood first.</p>";
+    screenMood.textContent = "No mood selected";
+    screenText.textContent = "Choose a mood to begin.";
     return;
   }
 
@@ -12,6 +15,8 @@ function generateRandomSong() {
 
   if (!moodData || !moodData.songs || moodData.songs.length === 0) {
     resultBox.innerHTML = "<p>No songs found for that mood yet.</p>";
+    screenMood.textContent = "Mood unavailable";
+    screenText.textContent = "No songs found.";
     return;
   }
 
@@ -19,11 +24,8 @@ function generateRandomSong() {
   const randomIndex = Math.floor(Math.random() * songs.length);
   const randomSong = songs[randomIndex];
 
-  if (cd) {
-    cd.classList.remove("spinning");
-    void cd.offsetWidth;
-    cd.classList.add("spinning");
-  }
+  screenMood.textContent = `${moodData.emoji} ${selectedMood.toUpperCase()}`;
+  screenText.textContent = `${randomSong.title} — ${randomSong.artist}`;
 
   resultBox.innerHTML = `
     <div class="song-title">${moodData.emoji} ${randomSong.title}</div>
