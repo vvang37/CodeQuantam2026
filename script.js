@@ -1,35 +1,22 @@
-function generateRandomSong() {
-  const selectedMood = document.getElementById("moodSelect").value;
-  const resultBox = document.getElementById("songResult");
-  const screenMood = document.getElementById("screenMood");
-  const screenText = document.getElementById("screenText");
+const moodButtons = document.querySelectorAll(".mood-btn");
+const songBox = document.getElementById("songBox");
 
-  if (!selectedMood) {
-    resultBox.innerHTML = "<p>Please select a mood first.</p>";
-    screenMood.textContent = "No mood selected";
-    screenText.textContent = "Choose a mood to begin.";
-    return;
-  }
+moodButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    moodButtons.forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
 
-  const moodData = songsByMood[selectedMood];
+    const selectedMood = button.dataset.mood;
+    const moodData = songsByMood[selectedMood];
 
-  if (!moodData || !moodData.songs || moodData.songs.length === 0) {
-    resultBox.innerHTML = "<p>No songs found for that mood yet.</p>";
-    screenMood.textContent = "Mood unavailable";
-    screenText.textContent = "No songs found.";
-    return;
-  }
+    if (!moodData || !moodData.songs || moodData.songs.length === 0) {
+      songBox.textContent = "No songs found";
+      return;
+    }
 
-  const songs = moodData.songs;
-  const randomIndex = Math.floor(Math.random() * songs.length);
-  const randomSong = songs[randomIndex];
+    const randomIndex = Math.floor(Math.random() * moodData.songs.length);
+    const randomSong = moodData.songs[randomIndex];
 
-  screenMood.textContent = `${moodData.emoji} ${selectedMood.toUpperCase()}`;
-  screenText.textContent = `${randomSong.title} — ${randomSong.artist}`;
-
-  resultBox.innerHTML = `
-    <div class="song-title">${moodData.emoji} ${randomSong.title}</div>
-    <div class="song-artist">by ${randomSong.artist}</div>
-    <div class="song-description">${moodData.description}</div>
-  `;
-}
+    songBox.innerHTML = `${randomSong.title}<br><span style="font-size: 0.8em;">${randomSong.artist}</span>`;
+  });
+});

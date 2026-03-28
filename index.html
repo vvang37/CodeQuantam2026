@@ -7,38 +7,28 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Mood Ring Radio</h1>
-    <p>Choose a mood and get a random song recommendation.</p>
+  <div class="app">
 
-    <div class="radio-screen">
-      <div class="screen-label">NOW PLAYING</div>
-      <div id="screenMood">Select a mood</div>
-      <div id="screenText">Your song will appear here</div>
+    <div class="radio-overlay">
+      <div class="project-box" id="projectBox">Mood Ring Radio</div>
+      <div class="song-box" id="songBox">Click a mood to get a song</div>
     </div>
 
-    <select id="moodSelect">
-      <option value="">-- Select a Mood --</option>
-      <option value="angry">🧨 Angry</option>
-      <option value="flirty">💋 Flirty</option>
-      <option value="chillness">😌 Chillness</option>
-      <option value="gloomy">🌧️ Gloomy</option>
-      <option value="yearn">💭 Yearn</option>
-      <option value="energetic">⚡ Energetic</option>
-    </select>
-
-    <button onclick="generateRandomSong()">Get Random Song</button>
-
-    <div id="songResult">
-      <p>Your random song will appear here.</p>
+    <div class="button-panel">
+      <button class="mood-btn" data-mood="angry">Angry</button>
+      <button class="mood-btn" data-mood="flirty">Flirty</button>
+      <button class="mood-btn" data-mood="chillness">Chill</button>
+      <button class="mood-btn" data-mood="gloomy">Gloomy</button>
+      <button class="mood-btn" data-mood="yearn">Yearn</button>
+      <button class="mood-btn" data-mood="energetic">Energetic</button>
     </div>
+
   </div>
 
   <script>
     const songsByMood = {
       angry: {
         emoji: "🧨",
-        description: "Loud, intense, and cathartic songs for when you're mad.",
         songs: [
           { title: "Misery Business", artist: "Paramore" },
           { title: "You Make Me Sick!", artist: "Ashnikko" },
@@ -57,7 +47,6 @@
 
       flirty: {
         emoji: "💋",
-        description: "Smooth, playful, and magnetic songs with flirty energy.",
         songs: [
           { title: "Sweet Serotonin", artist: "Amber Mark" },
           { title: "Warm Honey", artist: "WILLOW" },
@@ -75,10 +64,9 @@
 
       chillness: {
         emoji: "😌",
-        description: "Soft, calm, and easygoing songs for relaxed moods.",
         songs: [
-          { title: "Dark & Handsome (feat. Toro y Moi)", artist: "Blood Orange" },
-          { title: "Gabby (feat. Janelle Monáe)", artist: "The Internet" },
+          { title: "Dark & Handsome", artist: "Blood Orange" },
+          { title: "Gabby", artist: "The Internet" },
           { title: "Nude", artist: "Radiohead" },
           { title: "Care for You", artist: "The Marías" },
           { title: "Brown eyes*", artist: "re6ce" },
@@ -100,7 +88,6 @@
 
       gloomy: {
         emoji: "🌧️",
-        description: "Moody and melancholy songs for gloomy moments.",
         songs: [
           { title: "Exit Music", artist: "Radiohead" },
           { title: "Pandora", artist: "Whisp" },
@@ -110,7 +97,7 @@
           { title: "Only When I", artist: "Alice Phoebe Lou" },
           { title: "Velvet Mood", artist: "Alice Phoebe Lou" },
           { title: "Apocalypse", artist: "Neva Dinova" },
-          { title: "Some Unholy War (Down Tempo)", artist: "Amy Winehouse" },
+          { title: "Some Unholy War", artist: "Amy Winehouse" },
           { title: "Say Yes", artist: "Elliott Smith" },
           { title: "Bitter Everyday", artist: "Wednesday" },
           { title: "Wasting Your Time", artist: "Indigo De Souza" },
@@ -124,7 +111,6 @@
 
       yearn: {
         emoji: "💭",
-        description: "Longing, aching, and romantic songs for yearning moods.",
         songs: [
           { title: "Bags", artist: "Clairo" },
           { title: "American Love Song", artist: "Infinity Song & Momo Boyd" },
@@ -148,7 +134,6 @@
 
       energetic: {
         emoji: "⚡",
-        description: "Fast, bold, and high-energy songs to hype you up.",
         songs: [
           { title: "One More Time", artist: "Daft Punk" },
           { title: "Heads Will Roll", artist: "Yeah Yeah Yeahs" },
