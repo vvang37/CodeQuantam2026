@@ -4,25 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mood Ring Radio</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style2.css" />
 </head>
 <body>
-  <div class="app">
+  <div class="radio">
+    <div class="handle"></div>
+    <div class="logo">Mood Ring Radio</div>
 
-    <div class="radio-overlay">
-      <div class="project-box" id="projectBox">Mood Ring Radio</div>
-      <div class="song-box" id="songBox">Click a mood to get a song</div>
+    <div class="radio-inner">
+      <div class="speaker"></div>
+
+      <div class="controls">
+        <div class="display">
+          <input id="projectBox" type="text" value="Mood Ring Radio" readonly />
+          <div class="frequency" id="songBox">Click a mood to get a song</div>
+        </div>
+
+        <div class="button-panel">
+          <button class="mood-btn" data-mood="angry">Angry</button>
+          <button class="mood-btn" data-mood="flirty">Flirty</button>
+          <button class="mood-btn" data-mood="chillness">Chill</button>
+          <button class="mood-btn" data-mood="gloomy">Gloomy</button>
+          <button class="mood-btn" data-mood="yearn">Yearn</button>
+          <button class="mood-btn" data-mood="energetic">Energetic</button>
+        </div>
+      </div>
     </div>
-
-    <div class="button-panel">
-      <button class="mood-btn" data-mood="angry">Angry</button>
-      <button class="mood-btn" data-mood="flirty">Flirty</button>
-      <button class="mood-btn" data-mood="chillness">Chill</button>
-      <button class="mood-btn" data-mood="gloomy">Gloomy</button>
-      <button class="mood-btn" data-mood="yearn">Yearn</button>
-      <button class="mood-btn" data-mood="energetic">Energetic</button>
-    </div>
-
   </div>
 
   <script>
